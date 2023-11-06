@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn-primary {
+        @apply py-4 px-8 bg-amcor-light-blue w-fit text-white font-bold text-sm rounded-20 hover:bg-amcor-dark-blue focus:outline-none transition-all md:text-base;
+    }
+
+    .btn-primary-h-opacity {
+        @apply py-4 px-8 bg-amcor-light-blue w-fit mx-auto text-white font-bold text-xs rounded-20 hover:bg-opacity-90 focus:outline-none transition-all md:text-sm;
+    }
+
+    .btn-secondary {
+        @apply py-4 px-8 bg-amcor-dark-blue w-fit text-white font-bold text-xs rounded-20 hover:bg-amcor-light-blue focus:outline-none transition-all md:text-sm;
+    }
+
+    .btn-secondary-h-opacity {
+        @apply py-4 px-8 bg-amcor-dark-blue w-fit text-white font-bold text-xs rounded-20 hover:bg-opacity-90 focus:outline-none transition-all md:text-sm;
+    }
+
+    .btn-tertiary {
+        @apply py-4 px-8 bg-amcor-green w-fit text-white font-bold text-xs rounded-20 hover:bg-amcor-dark-blue focus:outline-none transition-all md:text-sm;
+    }
+
+    .btn-tertiary-h-opacity {
+        @apply py-4 px-8 bg-amcor-green w-fit text-white font-bold text-xs rounded-20 hover:bg-opacity-90 focus:outline-none transition-all md:text-sm;
+    }
+}
+
+*,
+html,
+body {
+    color: white;
+    font-family: 'REM', 'sans-serif';
+    box-sizing: border-box;
+}
+
+/* estilo lib element plus */
+/*form*/
+.el-form-item__label {
+    text-align: center!important;
+    color: #fff!important;
+    margin-bottom: 5px!important;
+    font-size: 0.813rem!important; /* 13px */
+}
+
+.el-form-item__label::before {
+    color: #fff!important;
+}
+
+@media (min-width: 768px) {
+    .el-form-item__label {
+        font-size: 0.875rem!important; /* 14px */
+    }
+}
+
+/* mensagem de erro de validação do input */
+.el-form-item__error {
+    color: #ffeeee!important;
+    font-size: 0.625rem!important; /*10px*/
+}
+
+.el-input__wrapper {
+    background: transparent!important;
+    border: 2px solid #fff;
+    box-shadow: none!important;
+    border-radius: 20px!important;
+    height: 50px!important;
+}
+
+.el-input__wrapper .el-input__inner {
+    color: #ffffff!important;
+    text-align: center!important;
+} 
+
+.el-input__wrapper .el-input__inner::placeholder {
+    color: rgba(255, 255, 255, .80)!important;
+    text-align: center!important;
+} 
+
+/* select */
+.el-select {
+    width: 100%!important;
+    margin: 0!important;
+}
+
+.el-input__suffix-inner>:first-child {
+    margin-left: 1px!important;
+}
+
+.el-select .el-input.is-focus .el-input__wrapper {
+    background-color: #00a1de!important;
+    border: none!important;
+}
+
+.el-select__popper {
+    border-radius: 20px!important;
+    background-color: #00a1de!important;
+    border: none!important;
+
+}
+
+.el-select__popper .el-popper__arrow {
+    display: none!important;
+}
+
+.el-select-dropdown__item {
+    background-color: transparent!important;
+}
+
+/* select - hover options */
+.el-select-dropdown__item.hover .option-icon::after  {
+    opacity: 1;
+}
+
+/* select - texto do option */
+.el-select-dropdown__item .option-content-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.el-select-dropdown__item .option-text {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* select - icone do option */
+.el-select-dropdown__item .option-icon {
+    margin-right: 18px;
+    display: flex!important;
+    align-items: center;
+    justify-content: center;
+    width: 26px!important;
+    height: 26px!important;
+    border: 2px solid #00395a!important;
+    border-radius: 100%;
+    position: relative;
+    transition: all 200ms ease-in-out ;
+}
+
+.el-select-dropdown__item .option-icon::after {
+    content: '';
+    display: block;
+    width: 70%;
+    height: 70%;
+    background-color: #fff;
+    opacity: 0;
+    position: absolute;
+    border-radius: 100%;
+}
+
+/* select - icone selecionado */
+.el-select-dropdown__item.selected .option-icon::after {
+    opacity: 1;
+}
+
+.el-select-dropdown__empty {
+    color: #fff!important;
+}
+
+/* ranking select */
+.ranking-select .el-input__inner {
+    font-size: 0.75rem; /* 12px */
+    font-weight: 700;
+}
+
+.ranking-select .el-input__wrapper {
+    border: 2px solid #00a1de!important;
+}
+
+
+/*loading*/
+
+.el-loading-mask svg .path {
+    stroke: #fff!important;
+}
+
+.__loading-dark-blue .el-loading-mask svg .path {
+    stroke: #00395a!important;
+}
+
+/*el message*/
+.el-message--error svg path {
+    fill: red!important;
+}
+
+.el-message--success svg path {
+    fill: green!important;
+}
+
+
+
+
+
