@@ -12,11 +12,11 @@
             >
                 <button class="btn-tertiary mb-5" @click="handleClickConfirm">Confirmar?</button>
                 <div 
-                    v-if="tipoPergunta === 1"
+                    v-if="tipoPergunta === '1'"
                     v-motion-slide-bottom
                     class="__resposta relative flex items-center justify-center gap-1 p-4 w-full max-w-xs min-h-[70px] bg-amcor-dark-blue rounded-20 text-13 font-bold">
                     <div class="text-center">
-                        <span class="text-amcor-light-blue">{{ letter }}. </span>
+                        <!-- <span class="text-amcor-light-blue">{{ letter }}. </span> -->
                         <span>{{ text }}</span>
                     </div>
                 </div>

@@ -34,30 +34,8 @@ export default {
             listaRanking: [],
         })
         onMounted(() => {
-            fetchRanking()
+
         })
-
-        async function fetchRanking() {
-            try {
-            
-                state.loadingRanking = true
-
-                const response = await api.get('/ranking')
-
-                state.listaRanking = response.data
-            } catch (error) {
-                console.log('error', error)
-                
-                ElMessage({
-                    showClose: true,
-                    message: 'Erro ao buscar o ranking.',
-                    type: "error"
-                })
-
-            } finally {
-                state.loadingRanking = false  
-            }
-        }
 
         const gridRanking = computed(() => {
             if (state.listaRanking.length >= 4) {

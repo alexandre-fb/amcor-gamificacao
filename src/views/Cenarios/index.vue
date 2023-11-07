@@ -29,7 +29,7 @@
               }"
             >
               <CardCenario 
-                :backgroundImage="cenario.image" 
+                :backgroundImage="cenario.imagem" 
                 :category="cenario.categoria" 
                 :title="cenario.titulo"
                 :description="cenario.descricao"

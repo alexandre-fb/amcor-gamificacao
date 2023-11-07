@@ -1,20 +1,26 @@
 <template>
-    <div>
+    <div class="max-w-4xl px-4">
+        <!-- titulo -->
+        <div>
+            <h3 class="my-4 font-bold text-13 text-center" v-if="perguntaData.intro">{{ perguntaData.intro }}</h3>
+            <h2 class="mb-4 font-bold text-lg text-center">{{ perguntaData.titulo }}</h2>
+        </div>
+
         <!-- image -->
         <div class="w-full flex justify-center">
-            <img :src="gameData.imagem" :alt="gameData.imagem_alt"
+            <img :src="imagem.imagem" :alt="imagem.imagem_alt"
                 class="w-full max-w-4xl h-[360px] lg:h-[460px] object-cover">
         </div>
 
         <!-- images options -->
         <div class="relative flex flex-col items-center -top-5 px-3">
             <ul class="relative flex justify-between w-full max-w-xs gap-3 mb-7">
-                <li v-for="(option, index) in gameData.respostas" :key="option + index" class="__option_wrapper relative flex flex-col items-center">
+                <li v-for="(option, index) in perguntaData.respostas" :key="option + index" class="__option_wrapper relative flex flex-col items-center">
                     <button
-                        class="relative z-10 w-full max-w-[100px] min-w-[80px] h-[100px] px-2 py-4 rounded-20 bg-amcor-green hover:scale-[1.02] transition-all shadow-lg hover:shadow-xl"
+                        class="relative z-10 w-full max-w-[100px] min-w-[80px] h-[100px] rounded-20 bg-amcor-green hover:scale-[1.02] transition-all shadow-lg hover:shadow-xl"
                         :class="state.optionSelected.index == index ? 'bg-amcor-green' : 'bg-white'"
                         @click="openModalOptions(index, option.texto)">
-                        <img :src="option.imagem" :alt="option.imagem_alt" loading="lazy">
+                        <img class="w-full h-full object-cover rounded-20" :src="option.imagem" :alt="option.imagem_alt" loading="lazy">
                     </button>
 
                     <!-- indicador (seta pra cima quando ativo)  -->
@@ -42,6 +48,7 @@
         :isActive="state.showModalOptions" 
         :letter="state.optionSelected.letter" 
         :text="state.optionSelected.text"
+        :tipoPergunta="'1'"
         @confirmModalClick="confirmModalClick" 
         @closeModalClick="closeModalOptions" 
     />
@@ -53,7 +60,8 @@ import ModalOption from '../ModalOption.vue'
 export default {
     name: 'PerguntaTipo1',
     props: {
-        gameData: Object
+        perguntaData: Object,
+        imagem: Object
     },
     components: {
         ModalOption
@@ -80,7 +88,7 @@ export default {
             }
             state.optionSelected = {
                 index: optionIndex,
-                id: props.gameData.respostas[optionIndex].id,
+                id: props.perguntaData.respostas[optionIndex].id,
                 text: optionText,
                 letter: optionLetter()
             }

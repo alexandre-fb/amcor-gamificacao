@@ -6,7 +6,6 @@
             <h2 class="text-lg font-bold" v-if="index === 0">2</h2>
             <h2 class="text-lg font-bold" v-if="index === 2">3</h2>
         </div>
-
         <div class="relative flex flex-col items-center justify-end h-[195px] w-[101px] sm:w-[110px] bg-amcor-light-blue rounded-20  pb-[18px]">
         <!-- :class="index === 1 ? 'firstRankinConteudo' : '' "> -->
            
@@ -39,8 +38,12 @@ export default {
     },
     setup(props) {  
         const formatedDataRanking = computed(() => {
-            if(props.dataRanking.length > 0) {
+            if(props.dataRanking.length === 3) {
                 return [props.dataRanking[1], props.dataRanking[0], props.dataRanking[2]]
+            } else if(props.dataRanking.length === 2) {
+                return [props.dataRanking[1], props.dataRanking[0]]
+            } else if(props.dataRanking.length === 1) {
+                return [props.dataRanking[0]]
             }
         })
 

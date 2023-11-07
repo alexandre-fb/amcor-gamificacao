@@ -46,12 +46,24 @@
 
                   <!-- <template v-if="pergunta.tipo_pergunta === 1"> -->
                   <template v-if="pergunta.respostas.some(resposta => resposta.imagem !== '')">
-                    <PerguntaTipo1  :gameData="pergunta" @confirmModalClick="handleConfirmResClick" />
+                    <PerguntaTipo1  
+                      :perguntaData="pergunta" 
+                      :imagem="{
+                        imagem: state.gameData.imagem,
+                        alt: state.gameData.imagem_alt
+                      }" 
+                      @confirmModalClick="handleConfirmResClick" />
                   </template>
 
                   <!-- <template v-if="pergunta.tipo_pergunta === 2"> -->
                   <template v-else>
-                    <PerguntaTipo2  :gameData="pergunta" @confirmModalClick="handleConfirmResClick" />
+                    <PerguntaTipo2  
+                      :perguntaData="pergunta" 
+                      :imagem="{
+                        imagem: state.gameData.imagem,
+                        alt: state.gameData.imagem_alt
+                      }"
+                      @confirmModalClick="handleConfirmResClick" />
                   </template>
                 </div>
               </div>
@@ -92,6 +104,7 @@ import IconCronometro from '../../components/Icons/IconCronometro.vue'
 import GameResult from './components/GameResult.vue'
 import PerguntaTipo1 from './components/Perguntas/PerguntaTipo1.vue'
 import PerguntaTipo2 from './components/Perguntas/PerguntaTipo2.vue'
+import { useUserStore } from '../../stores/UserStore.js'
 
 export default {
   components: {
@@ -137,84 +150,84 @@ export default {
         state.loadingCenario = true
 
         // const response = await api.get('/game-1')
-        const response = await apiFetch.get(`/cenario/detalhar/${1}`)
+        const response = await apiFetch.get(`/cenario/detalhar/${state.cenarioId}`)
 
         state.gameData = response.data.dados
 
         //======só para teste
 
-        state.gameData.imagem = "https://planmkt.com.br/clientes/amcor/images_temp/cenario-detalhe-cover.webp"
-        state.gameData.perguntas[0].imagem = 'https://planmkt.com.br/clientes/amcor/images_temp/cenario-detalhe-cover.webp'
-        state.gameData.perguntas[1].imagem = 'https://planmkt.com.br/clientes/amcor/images_temp/cenario-detalhe-cover.webp'
-        state.gameData.perguntas[2].imagem = 'https://planmkt.com.br/clientes/amcor/images_temp/cenario-detalhe-cover.webp'
-        state.gameData.perguntas[0].respostas = [
-          {
-              id: 4,
-              texto: "dsdsdsd",
-              cenario_pergunta_id: 4,
-              imagem: "https://planmkt.com.br/clientes/amcor/images_temp/quiz/bombeiro.webp",
-              imagem_alt: 'Teste',
-              ativo: 1,
-              created_at: "2023-10-18T17:50:28.000000Z",
-              updated_at: "2023-10-18T17:50:28.000000Z"
-          },
-          {
-              id: 5,
-              texto: "dsdsdsd",
-              cenario_pergunta_id: 4,
-              imagem: 'https://planmkt.com.br/clientes/amcor/images_temp/quiz/gerente.webp',
-              imagem_alt: null,
-              ativo: 1,
-              created_at: "2023-10-18T17:50:28.000000Z",
-              updated_at: "2023-10-18T17:50:28.000000Z"
-          }
-      ],
-        state.gameData.perguntas[1].respostas = [
-          {
-              id: 4,
-              texto: "dsdsdsd",
-              cenario_pergunta_id: 4,
-              imagem: "https://planmkt.com.br/clientes/amcor/images_temp/quiz/bombeiro.webp",
-              imagem_alt: 'Teste',
-              ativo: 1,
-              created_at: "2023-10-18T17:50:28.000000Z",
-              updated_at: "2023-10-18T17:50:28.000000Z"
-          },
-          {
-              id: 5,
-              texto: "dsdsdsd",
-              cenario_pergunta_id: 4,
-              imagem: 'https://planmkt.com.br/clientes/amcor/images_temp/quiz/gerente.webp',
-              imagem_alt: null,
-              ativo: 1,
-              created_at: "2023-10-18T17:50:28.000000Z",
-              updated_at: "2023-10-18T17:50:28.000000Z"
-          }
-      ]
-        state.gameData.perguntas[2].respostas = [
-          {
-              id: 4,
-              texto: "dsdsdsd",
-              cenario_pergunta_id: 4,
-              imagem: '',
-              imagem_alt: '',
-              ativo: 1,
-              created_at: "2023-10-18T17:50:28.000000Z",
-              updated_at: "2023-10-18T17:50:28.000000Z"
-          },
-          {
-              id: 5,
-              texto: "dsdsdsd",
-              cenario_pergunta_id: 4,
-              imagem: '',
-              imagem_alt: null,
-              ativo: 1,
-              created_at: "2023-10-18T17:50:28.000000Z",
-              updated_at: "2023-10-18T17:50:28.000000Z"
-          }
-      ]
+      //   state.gameData.imagem = "https://planmkt.com.br/clientes/amcor/images_temp/cenario-detalhe-cover.webp"
+      //   state.gameData.perguntas[0].imagem = 'https://planmkt.com.br/clientes/amcor/images_temp/cenario-detalhe-cover.webp'
+      //   state.gameData.perguntas[1].imagem = 'https://planmkt.com.br/clientes/amcor/images_temp/cenario-detalhe-cover.webp'
+      //   state.gameData.perguntas[2].imagem = 'https://planmkt.com.br/clientes/amcor/images_temp/cenario-detalhe-cover.webp'
+      //   state.gameData.perguntas[0].respostas = [
+      //     {
+      //         id: 4,
+      //         texto: "dsdsdsd",
+      //         cenario_pergunta_id: 4,
+      //         imagem: "https://planmkt.com.br/clientes/amcor/images_temp/quiz/bombeiro.webp",
+      //         imagem_alt: 'Teste',
+      //         ativo: 1,
+      //         created_at: "2023-10-18T17:50:28.000000Z",
+      //         updated_at: "2023-10-18T17:50:28.000000Z"
+      //     },
+      //     {
+      //         id: 5,
+      //         texto: "dsdsdsd",
+      //         cenario_pergunta_id: 4,
+      //         imagem: 'https://planmkt.com.br/clientes/amcor/images_temp/quiz/gerente.webp',
+      //         imagem_alt: null,
+      //         ativo: 1,
+      //         created_at: "2023-10-18T17:50:28.000000Z",
+      //         updated_at: "2023-10-18T17:50:28.000000Z"
+      //     }
+      // ],
+      //   state.gameData.perguntas[1].respostas = [
+      //     {
+      //         id: 4,
+      //         texto: "dsdsdsd",
+      //         cenario_pergunta_id: 4,
+      //         imagem: "https://planmkt.com.br/clientes/amcor/images_temp/quiz/bombeiro.webp",
+      //         imagem_alt: 'Teste',
+      //         ativo: 1,
+      //         created_at: "2023-10-18T17:50:28.000000Z",
+      //         updated_at: "2023-10-18T17:50:28.000000Z"
+      //     },
+      //     {
+      //         id: 5,
+      //         texto: "dsdsdsd",
+      //         cenario_pergunta_id: 4,
+      //         imagem: 'https://planmkt.com.br/clientes/amcor/images_temp/quiz/gerente.webp',
+      //         imagem_alt: null,
+      //         ativo: 1,
+      //         created_at: "2023-10-18T17:50:28.000000Z",
+      //         updated_at: "2023-10-18T17:50:28.000000Z"
+      //     }
+      // ]
+      //   state.gameData.perguntas[2].respostas = [
+      //     {
+      //         id: 4,
+      //         texto: "dsdsdsd",
+      //         cenario_pergunta_id: 4,
+      //         imagem: '',
+      //         imagem_alt: '',
+      //         ativo: 1,
+      //         created_at: "2023-10-18T17:50:28.000000Z",
+      //         updated_at: "2023-10-18T17:50:28.000000Z"
+      //     },
+      //     {
+      //         id: 5,
+      //         texto: "dsdsdsd",
+      //         cenario_pergunta_id: 4,
+      //         imagem: '',
+      //         imagem_alt: null,
+      //         ativo: 1,
+      //         created_at: "2023-10-18T17:50:28.000000Z",
+      //         updated_at: "2023-10-18T17:50:28.000000Z"
+      //     }
+      // ]
 
-      state.gameData.perguntas.shift()
+      // state.gameData.perguntas.shift()
 
 
       //======fim só para teste
@@ -298,21 +311,29 @@ export default {
     async function fetchGameResult() {
       try {
         state.loadingResultData = true
-
+        
+        
         const body = {
-          // cenario_id: state.cenarioId,
-          cenario_id: "2", //para teste
-          usuario_token: "38K4ggPBdNLxv1H08iCNgGW9BwdWwfGgTcLF4XKaXghSyrvn6AR0mH8qfobRgHIV1DXEUQ7hof3ihjs8HK3llzuqS7SasaOouIUut3xNC50RZEwlHdHIShC01coHWgQYgIuRItgJlADDZrjir1jgAmTmD7ndLfUX",
-          respostas: [1,5], //para teste
-          // respostas: state.respostas,
+          cenario_id: state.cenarioId,
+          usuario_token: localStorage.getItem('token'),
+          respostas: state.respostas,
           tempo: state.timeInSeconds
         }
 
         const response = await apiFetch.post('cenario/jogar', body)
+        
+        
+        
         console.log('response jogar', response)
         state.resultData = response.data
+        
         state.resultData.totalTime = formatTimeCronometro(state.timeInSeconds)
         console.log('state.resultData', state.resultData)
+        
+        const userStore = useUserStore()
+        let userData = userStore.user
+        userData.medalhas = response.data.medalhas 
+        userStore.setUser(userData)
 
       } catch (error) {
         console.log('error', error)

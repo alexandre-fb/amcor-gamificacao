@@ -1,15 +1,21 @@
 <template>
     <div>
+        <!-- titulo -->
+        <div>
+            <h3 class="my-4 font-bold text-13 text-center" v-if="perguntaData.intro">{{ perguntaData.intro }}</h3>
+            <h2 class="mb-4 font-bold text-lg text-center">{{ perguntaData.titulo }}</h2>
+        </div>
+
         <!-- image -->
         <div class="w-full flex justify-center mb-5">
-            <img :src="gameData.imagem" :alt="gameData.imagem_alt"
+            <img :src="imagem.imagem" :alt="imagem.imagem_alt"
                 class="w-full max-w-4xl h-[360px] lg:h-[460px] object-cover">
         </div>
 
         <!-- options -->
         <div class="relative w-full px-3">
             <ul class="relative flex flex-col justify-between w-full max-w-4xl gap-3 mb-7">
-                <li v-for="(option, index) in gameData.respostas" :key="option + index" class="relative">
+                <li v-for="(option, index) in perguntaData.respostas" :key="option + index" class="relative">
                     <button
                         class="relative z-10 w-full min-w-[80px] min-h-[70px] px-3 py-4 rounded-20 hover:scale-[1.009] transition-all shadow-lg hover:shadow-xl"
                         :class="state.optionSelected.index == index ? 'bg-amcor-green text-white' : 'bg-amcor-dark-blue'"
@@ -28,7 +34,7 @@
         :isActive="state.showModalOptions" 
         :letter="state.optionSelected.letter" 
         :text="state.optionSelected.text"
-        :tipoPergunta="2"
+        :tipoPergunta="'2'"
         @confirmModalClick="confirmModalClick" 
         @closeModalClick="closeModalOptions" 
     />
@@ -40,7 +46,8 @@ import ModalOption from '../ModalOption.vue'
 export default {
     name: 'PerguntaTipo2',
     props: {
-        gameData: Object
+        perguntaData: Object,
+        imagem: Object
     },
     components: {
         ModalOption
@@ -79,7 +86,7 @@ export default {
             }
             state.optionSelected = {
                 index: optionIndex,
-                id: props.gameData.respostas[optionIndex].id,
+                id: props.perguntaData.respostas[optionIndex].id,
                 text: optionText,
                 letter: optionLetter(),
             }

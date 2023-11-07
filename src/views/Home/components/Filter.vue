@@ -47,6 +47,8 @@ import { onMounted, reactive } from 'vue';
 import IconFilter from '../../../components/Icons/IconFilter.vue';
 import IconLupa from '../../../components/Icons/IconLupa.vue';
 
+import MockEstaticoCategorias from '../../../mocksEstaticos/categorias.js'
+
 export default {
   name: 'FilterHome',
   components: {
@@ -62,7 +64,8 @@ export default {
     })
 
     onMounted(() => {
-      fetchCategorias()
+      // fetchCategorias()
+      state.categorias = MockEstaticoCategorias
     })
 
     const router = useRouter()
@@ -75,8 +78,8 @@ export default {
       try {
         state.loadingCategorias = true
 
-        const response = await api.get('/categorias')
-        state.categorias = response.data
+        // const response = await api.get('/categorias')
+        // state.categorias = response.data
 
         addCategoriaTodos()
         

@@ -62,7 +62,8 @@
 
             <!-- USER -->
             <button class="absolute right-0 w-[50px] h-[50px] cursor-pointer" @click.stop="toogleModalUserData">
-                <img src="/images/user-header-img.webp" alt="EHS play" class="w-full h-full object-cover rounded-2xl">
+                <img :src="'https://amcor.planteste.com.br/storage/' + state.userData.foto" alt="EHS play" class="w-full h-full object-cover rounded-2xl">
+                <!-- <img src="/images/user-header-img.webp" alt="EHS play" class="w-full h-full object-cover rounded-2xl"> -->
                 <div
                     class="absolute flex items-center justify-center -bottom-2 -left-2 p-2 min-w-[26px] h-5 bg-amcor-light-blue rounded-2xl">
                     <span class="font-bold"

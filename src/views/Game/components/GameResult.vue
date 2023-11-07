@@ -28,7 +28,7 @@
 
         <div class="flex flex-col items-center w-full"> 
             <!-- sem medalhas -->
-            <div v-if="medal === ''"
+            <div v-if="!medal"
                  class="flex justify-center items-center min-h-[220px]"     
                 >
                 <p class="max-w-xs md:max-w-md text-lg font-bold text-center">

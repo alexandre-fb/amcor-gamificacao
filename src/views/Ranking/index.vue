@@ -90,17 +90,22 @@
         v-else
         v-motion-fade 
       >
+        <div v-if="state.ranking.length > 0">
           <!-- Top Ranking  -->
-        <div class="w-full flex items-end pt-[9px] pb-[25px] gap-[10px] sm:gap-[35px] justify-center">
-          <RankingItemsTop 
-          :dataRanking="state.rankingTopThree"
-          />
+          <div class="w-full flex items-end pt-[9px] pb-[25px] gap-[10px] sm:gap-[35px] justify-center">
+            <RankingItemsTop 
+            :dataRanking="state.rankingTopThree"
+            />
+          </div>
+          <!-- Lista Ranking  -->
+          <div class="w-full flex flex-col items-center gap-[10px] justify-center">
+            <RankingItems 
+            :dataRankingList="state.rankingWithoutTopThree"
+            />
+          </div>
         </div>
-        <!-- Lista Ranking  -->
-        <div class="w-full flex flex-col items-center gap-[10px] justify-center">
-          <RankingItems 
-          :dataRankingList="state.rankingWithoutTopThree"
-          />
+        <div v-else class="w-full text-center my-4">
+          <h2>Sem dados!</h2>
         </div>
       </div>
    
@@ -150,9 +155,9 @@ export default {
           state.loadingRanking = true
 
           const response = await apiFetch.get(`/usuario/ranking/${ state.filter.unidade || null }/${ state.filter.setor || null }`)
-
-          getTopThree(response.data.itens)
-          getRankingWithoutTopThree(response.data.itens)
+          state.ranking = response.data.itens
+          getTopThree(state.ranking)
+          getRankingWithoutTopThree(state.ranking)
 
       } catch (error) {
           console.log('error', error)
@@ -220,11 +225,11 @@ export default {
 
     // Ranking top 3 
     function getTopThree(rankingComplet) {
-
+      console.log('rankingComplet', rankingComplet)
       if(rankingComplet.length >= 3)  {
         state.rankingTopThree = rankingComplet.slice(0, 3);
       } else {
-        state.rankingWithoutTopThree = rankingComplet;
+        state.rankingTopThree = rankingComplet;
       }
     }
     // Ranking top 4 em diante 
@@ -232,7 +237,7 @@ export default {
         if (rankingComplet.length >= 4) {
           state.rankingWithoutTopThree = rankingComplet.slice(3);
       } else {
-          state.rankingWithoutTopThree = rankingComplet;
+          state.rankingWithoutTopThree = []
       }
     }
     // Possivel filtro futuro

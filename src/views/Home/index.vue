@@ -27,7 +27,7 @@
             }"
           >
             <CardCenario 
-              :backgroundImage="firstCenario.image" 
+              :backgroundImage="firstCenario.imagem" 
               :category="firstCenario.categoria" 
               :title="firstCenario.titulo"
               :description="firstCenario.descricao"
@@ -47,7 +47,7 @@
               }"
             >
               <CardCenario 
-                :backgroundImage="cenario.image" 
+                :backgroundImage="cenario.imagem" 
                 :category="cenario.categoria" 
                 :title="cenario.titulo"
                 :description="cenario.descricao"
@@ -76,7 +76,7 @@
 
 <script>
 import { onMounted, reactive, computed } from 'vue';
-import { api } from '../../services/api.js'
+import { api, apiFetch } from '../../services/api.js'
 import Filter from './components/Filter.vue';
 import CardCenario from '../../components/CardCenario/index.vue'
 
@@ -94,7 +94,7 @@ export default {
       categoriaSelected: ''
     })
     onMounted(() => {
-      // fetchCenarios()
+      fetchCenarios()
       state.listaCenarios = MockEstaticoHomeCenarios
     })
 
@@ -103,9 +103,10 @@ export default {
        
         state.loadingCenarios = true
 
-        // const response = await api.get('/home-cenarios')
+        const response = await apiFetch.get('/cenario/listar')
 
-        // state.listaCenarios = response.data
+        // pega os 5 primeiros
+        state.listaCenarios = response.data.itens.slice(0, 5);
       } catch (error) {
         console.log('error', error)
         
