@@ -134,6 +134,7 @@ export default {
       state.categoriaSelected = categoriaSelected
     }
     
+    
     return {
       state,
       firstCenario,
