@@ -30,7 +30,7 @@
             >
               <CardCenario 
                 :backgroundImage="cenario.imagem" 
-                :category="cenario.categoria" 
+                :category="cenario.categoria_nome" 
                 :title="cenario.titulo"
                 :description="cenario.descricao"
                 :medal="cenario.medalha"

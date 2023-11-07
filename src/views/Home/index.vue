@@ -28,7 +28,7 @@
           >
             <CardCenario 
               :backgroundImage="firstCenario.imagem" 
-              :category="firstCenario.categoria" 
+              :category="firstCenario.categoria_nome" 
               :title="firstCenario.titulo"
               :description="firstCenario.descricao"
               :medal="firstCenario.medalha"
@@ -48,7 +48,7 @@
             >
               <CardCenario 
                 :backgroundImage="cenario.imagem" 
-                :category="cenario.categoria" 
+                :category="cenario.categoria_nome" 
                 :title="cenario.titulo"
                 :description="cenario.descricao"
                 :medal="cenario.medalha"
