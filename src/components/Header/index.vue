@@ -167,6 +167,7 @@
 <script>
 import { onBeforeUnmount, onMounted, reactive, computed, onBeforeMount } from 'vue';
 import { useUserStore } from '../../stores/UserStore.js';
+import { useRouter } from 'vue-router';
 
 // icons
 import IconQuestion from '../Icons/IconQuestion.vue';
@@ -249,6 +250,7 @@ export default {
         })
 
         const userStore = useUserStore()
+        const router = useRouter();
 
         onBeforeMount(() => {
             window.addEventListener("click", clickOutside);
@@ -315,7 +317,8 @@ export default {
 
         function logout() {
             userStore.clear()
-            window.location.href = '/login';
+            // window.location.href = '/login';
+            router.push('/login');
         }
 
         return {
